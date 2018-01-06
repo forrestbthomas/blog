@@ -15,6 +15,9 @@ jobs:
     working_directory: /blog
     steps:
       - run:
+	  name: Check files
+	  command: pwd && ls /blog
+      - run:
           name: Deploy if tests pass and branch is Master
           command: aws s3 sync index.html s3://forrestbthomas.com/index.html
 
