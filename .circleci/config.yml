@@ -2,12 +2,16 @@
 version: 2
 jobs:
   build-job:
+    docker:
+      - image: forrestbthomas/blog
     working_directory: /tmp/my-project
     steps:
       - run: echo "awscli exists..."
       - run: echo `which aws`
             
   deploy-job:
+    docker:
+      - image: forrestbthomas/blog
     working_directory: /tmp/my-project  
     steps:
       - run:
