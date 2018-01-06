@@ -17,7 +17,7 @@ jobs:
     steps:
       - run:
           name: Deploy if tests pass and branch is Master
-          command: aws s3 sync index.html s3://forrestbthomas.com/index.html
+          command: aws s3 sync /blog/index.html s3://forrestbthomas.com/
 
 workflows:
   version: 2
