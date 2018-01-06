@@ -18,7 +18,7 @@ jobs:
     steps:
       - run:
           name: Deploy if tests pass and branch is Master
-          command: aws s3 cp /index.html s3://forrestbthomas.com/
+          command: aws s3 cp index.html s3://forrestbthomas.com/
 
 workflows:
   version: 2
