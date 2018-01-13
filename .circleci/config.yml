@@ -18,7 +18,7 @@ jobs:
     steps:
       - run:
           name: Deploy if tests pass and branch is Master
-          command: aws s3 cp index.html s3://forrestbthomas.com/ --acl public-read
+          command: aws s3 sync ./ s3://forrestbthomas.com/ --acl public-read
 
 workflows:
   version: 2
