@@ -17,6 +17,9 @@ jobs:
       - image: forrestbthomas/blog
     working_directory: /blog
     steps:
+      -run:
+          name: Pull latest
+          command: git pull origin master
       - run:
           name: Deploy if tests pass and branch is Master
           command: aws s3 cp /blog/index.html s3://forrestbthomas.com/ --acl public-read
