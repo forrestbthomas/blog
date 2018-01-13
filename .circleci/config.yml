@@ -8,8 +8,9 @@ jobs:
     steps:
       - run: echo `which aws`
       - run: git pull origin master
-      - run: pwd && ls /blog
+      - run: pwd && ls ./
       - run: echo $AWS_ACCESS_KEY_ID && echo $AWS_SECRET_ACCESS_KEY
+      - run: cat index.html
             
   deploy-job:
     docker:
@@ -18,7 +19,7 @@ jobs:
     steps:
       - run:
           name: Deploy if tests pass and branch is Master
-          command: aws s3 sync ./ s3://forrestbthomas.com/ --acl public-read
+          command: aws s3 cp index.html s3://forrestbthomas.com/ --acl public-read
 
 workflows:
   version: 2
