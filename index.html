@@ -1,29 +1,66 @@
 
+
 <!DOCTYPE HTML>
 
 <html>
 
 	<head>
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Vollkorn">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>The Blog</title>
+		<style>
+			body {
+				font-family: 'Vollkorn', serif;
+			}
+		</style>
 	</head>
 
 	<body>
 
 		<header>
-			<h1>This is my blog...<sub><i>sorry, not sorry?</i></sub></h1>
+			<h1>This is my blog...
+				<sub><i style="font-size: 12px;">sorry, not sorry?</i></sub>
+			</h1>
 		</header>
+		<hr>
+		<section>
+			<article>
+				<header>
+					<h3>
+						Kafka and Websockets
+						<span class="view" style="font-size: 12px;font-weight: 100;color: blue;text-decoration: underline;cursor: pointer;">
+							Hide
+						</span>
 
+					</h3>
+				</header>
+				<div style="display: block;">
+
+					<i><p>Posted on <time>Sun Jan 14 2018</time> by <a href="#about">forrestbthomas</a></p></i>
+					<p>So, here is my second blog post in as many weeks. Go me! I didn't get as much coding in this week as I would have liked, but that's just kind of the way life goes sometimes. I did a bit of optimization on my deployment for this blog, but that didn't take too much work. It's interesting because with something like this blog, I wonder if I even needed to do it at all. I mean, it's nice that I don't have to do anything other than push to <a href="https://github.com/forrestbthomas">GitHub</a> now and my blog is updated, but I spent several hours setting it up. If I were to count the total time it would take me to simply copy and paste this <code>index.html</code> file over to S3 over the course of my life, I'm not sure it would ever amount to several hours. I guess that's neither here nor there, since it's done now. Lol. It did give me the chance to learn a bit about Git <a href="https://git-scm.com/book/gr/v2/Customizing-Git-Git-Hooks">commit hooks</a> , which was nice. There was one instance in my deployment this week where I had a syntax problem in my <code>config.yml</code> file and didn't know it until it went into <a href="https://circleci.com">CircleCI</a>. Well, that's not ideal, obviously. What I ended up doing is running a <a href="https://npmjs.com/package/yaml-lint">YAML linter</a> before each commit. Supposedly, if that pre-commit hook exits with a non-zero code the commit is supposed to abort. I haven't found that to be the case, but at the very least the YAML linter runs every commit and outputs any errors, so I can always make changes and commit again. </p>
+					<p>I also got to spend a little bit of time with my Kafka/Twitter project. This time on the <a href="https://github.com/forrestbthomas/kafka-frontend">front end</a>. As you may have guessed from my previous post, front end development isn't at the top of my list of interests, but I do enjoy it at times. This was one of them. My setup so far is pretty straightforward. I have a <a href="https://kafka.apache.org/">Kafka</a> producer that connects to the free <a href="https://developer.twitter.com/en/docs/tweets/filter-realtime/overview">Twitter Streaming API</a> and filters the stream on keywords that I specify, then it takes those tweets and puts them on a Kafka topic. Next, I use <a href="http://www.onyxplatform.org/">Onyx</a> as my stream processor and Kafka consumer to read in those tweets, conform them, analyze sentiment, and place those output segments onto a separate Kafka topic. That whole part of the project is written in Clojure and I have to say was a lot of fun. The part I started working on this last week was a front end app that would essentially get those sentiment-analyzed tweets and overlay the sentiment on a map of the US. The sentiment would be represented as colors (0 = red, 2 = yellow, 4 = green) and the tweets would be grouped by lat/long coordinates and placed on a D3 map. I ended up using <a href="https://plot.ly/">Plot.ly</a> for the map because it was way easier than rolling my own D3 outline of the US and also added a nice API on top that made it easier for me to overlay colored bubbles by lat/long coordinates. On the API side of the app, I used raw <a href="https://nodejs.org/en/">Node.js</a> as a static server of assets as well as a consumer of the Kafka topic. That part was interesting and I'm not sure I like my approach yet, so we'll see how it goes. But, basically, it didn't appear as though there was a lot of packages available (or regularly maintained) that turned a Node server into a Kafka consumer, so I just used Node's <a href="https://nodejs.org/dist/latest-v8.x/docs/api/child_process.html">child_process</a> module to run the built-in command line Kafka consumer and used stdout and stderr to determine what to do with the message. I created a websocket connection between the front end and the node server, so that anytime the kafka consumer got a new tweet, it would broadcast that tweet as JSON to all clients (which in my case was just my browser).</p>
+					<p>This generally worked and I was happy to see messages flowing from the Twitter Streaming API and appear as color coded bubbles on my Plot.ly map, but there are certainly some areas that need tweaking. For one, I'm not sure I need a websocket server. There really isn't a need to have bi-directional communication in my use case since the front end is purely static and there isn't even a way for the front end to communicate with the back end at this point. I could just as easily have used regular old HTTP and been just fine. Part of me wonders, though, if I might want to add the ability for the front end to toggle the stream in some way. For example, if I wanted to pause the display of tweets, rewind and playback old tweets for recording and saving, or even add the ability to change keywords on the stream in real-time. There is <i>probably</i> a reason to keep using websockets, so I think I will, but it's good to consider other options. The other that could use some tweaking is the Plot.ly integration. Right now, I'm using an API from Plot.ly that allows me to read in a file (JSON or CSV) and it will plot the graoh accordingly. This is really useful if I already have a data set saved to disk or if I have a static file stored in the cloud. But when I have streaming data that changes constantly, I am having to redraw the whole graph every time. That's gross. And I don't like it. There are definitely better ways of handling the updating of graph data and its display, so I will probably be looking into that this week.</p>
+					<p>Well, that's all I have for now. Hopefully, next week I can provide an update on my front end tweaks (if I get around to them) or some other thing that I have learned. Thanks for reading. Take care.</p>
+				</div>
+			</article>
+		</section>
+		<hr>
 		<section>
 
 			<article>
 				<header>
-					<h3>I Give Up</h3> 
-					<i><p>Posted on <time> Sat Jan 06 2018 </time> by <a href="#about">forrestbthomas</a></p></i>
+					<h3>
+						I Give Up
+						<span class="view" style="font-size: 12px;font-weight: 100;color: blue;text-decoration: underline;cursor: pointer;">
+							Hide
+						</span>
+
+					</h3>
 
 				</header>
-				<span class="view" style="font-size: 12px;font-weight: 100;color: blue;text-decoration: underline;cursor: pointer;">Hide</span>
 				<div style="display: block;">
+
+					<i><p>Posted on <time> Sat Jan 06 2018 </time> by <a href="#about">forrestbthomas</a></p></i>
 					<p>Ok, not really. Here I am, at it again. My third attempt at a blog. Why do I put myself through this? Usually what happens is that I start a blog, write a couple of posts about things that I'm learning and then I lose interest and move on to other things. What makes this time different? Probably nothing, but I know that its important to write about what I'm learning, at the very least because blogs are the primary way new companies evaluate candidates (that and their GitHub repos). Yeah, there are the actual coding interviews, but I'm not gonna get too bent out of shape about companies that care <i>A LOT</i> about how you code in a coding interview. I'll just continue doing what everyone else does: read and memorize Cracking The Coding Interview, do a million problems on LeetCode and I'll be fine. Apparently that's the best measure we can come up with to determine the relative potential success of candidates. To be fair, it does seem like a hard problem to solve, but then again it also seems like we have enough data by this time to realize that memorizing how to reverse a Linked List doesn't correlate <i>at all</i> with how successful someone will be as an engineer. But I digress...</p>
 					<p>Or do I? I guess maybe that's as good of a place as any to start my new blog, and might also lend itself towards an explanation of why I am writing this blog by hand in HTML and just saving it to GitHub rather than using WebAssembly-Native-React-Flux-Webpack-Treeshaking-SinglePageApplication-CLI-Component-SASS-Precompiled-CircleCI-CI/CD-Awesomesauce. See, like you, I care about what I care about. I find interesting, what I find interesting. I optimize for what I optimize. And, at this particular place in my life, I don't care a whole lot about front-end buzzwords because I don't find the technology that interesting (nor do I think it will even exist in about 5-10 years) and so I am no longer optimizing for it. I get that, for <b>A LOT</b> of people, front-end technology is infinitely interesting and they care deeply about it. That's awesome. Anytime someone is really, truly passionate about a certain technology and they have the opportunity to put it to good use on the regular, I am really happy for them. It's just not for me. Maybe that means I'm missing out, but I'm OK with that. Just like I'm OK with missing out on <a href="https://en.wikipedia.org/wiki/Balut_(food)">Balut</a>. There are people who are nuts about that stuff. It would take a lot of dollar bills to make me eat that. Again, I digress...</p>
 					<p>So, what <i>do</i> I care about right now then? The key to that question is "right now" because my interests change all the time. It seems like I am into novelty more than anything else. So, once I learn something to a certain extent I just kinda lose interest unless the topic at hand is by its nature an evolving topic. At the moment, I'm really interested in stream processing. The idea of getting loads and loads of data constantly and building a system that is performant enough to handle the load, resilient enough to deal with errors, and interesting enough to do something meaningful with the data its getting is really, really interesting to me. For example, I am working on a personal project right now that consumes the Twitter streaming API in order to filter the tweets based on keywords, analyze the sentiment of the tweets and overlay that sentiment on a map to show the relative locations of sentiment. I'm using Clojure, Kafka and Onyx for the stream processing and I'll probably use raw D3 and HTML5/CSS3 for the display (once I get that far). It's been a lot of fun so far and I really look forward to having a POC to put up on GitHub and show off.</p>
@@ -33,7 +70,7 @@
 			</article>
 
 		</section>
-
+		<hr>
 		<aside>
 			<h3 id="about">About section</h3>
 			<p>My name is Forrest and I'm a software engineer...I think. I like to learn new things. The keyword there is <strong>new</strong>. But also I like to learn <i>interesting</i> things. What's interesting is entriely subjective and I truly apologize if what I find uninteresting is something that you can't get enough of (really...no sarcasm there...I honestly hate offending people). This is my third attempt at a blog...I'm really bad at it, but I keep coming back to it because it's something I can <i>probably</i> be good at if I try hard enough. If you want to know about me or about what I find interesting or if you're from the HR department of a company I just applied to (you should hire me, I'm awesome) then you can find out all about that stuff in my posts above. Thanks.</p>
@@ -55,8 +92,10 @@ views.forEach(function(view){
 	view.addEventListener("click", toggleView);
 })
 function toggleView(e) {
-	e.target.nextElementSibling.setAttribute("style", "display: " + styleToggle[e.target.nextElementSibling.style.display] + ";");
-	e.target.innerHTML = styleToggle[e.target.innerHTML];
+	var pNode = e.target.parentElement.parentElement.nextElementSibling;
+	var ihtml = e.target.innerHTML.replace(/\s/g, "");
+	pNode.setAttribute("style", "display: " + styleToggle[pNode.style.display] + ";");
+	e.target.innerHTML = styleToggle[ihtml];
 }
 		</script>
 	</body>
