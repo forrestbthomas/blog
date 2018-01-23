@@ -18,6 +18,13 @@
 		<style>
 			body { font-family: 'Vollkorn', serif; }
 			code { background-color: #fffdf7; }
+			.clickable {
+				font-size: 12px;
+				font-weight: 100;
+				color: blue;
+				text-decoration: underline;
+				cursor: pointer;
+			}
 		</style>
 	</head>
 
@@ -35,13 +42,13 @@
 				<header>
 					<h3>
 						Immutability Still Breaks My Brain
-						<span class="view" style="font-size: 12px;font-weight: 100;color: blue;text-decoration: underline;cursor: pointer;">
-							Hide
+						<span class="view clickable">
+							Show
 						</span>
 
 					</h3>
 				</header>
-				<div style="display: block;">
+				<div style="display: none;">
 
 					<i><p>Posted on <time>Sat Jan 20 2018</time> by <a href="#about">forrestbthomas</a></p></i>
 					<p>I mentioned in my first post some snarky comment about reversing a Linked List and its correlation to productive software engineering (apologies for the snark, I should probably work on that) and it made me wonder if I could manage to write the necessary algorithm in an immutable way. I've been learning Clojure for about 6 months now and I feel like I'm getting the hang of it. I'm not a pro by any means, but the basic concepts of immutability, parallelism and a "functional" style of programming seem to have coalesced to a greater or lesser extent. So, I figured, why not try to implement something that I felt confident enough about to be snarky?</p>
@@ -174,20 +181,18 @@ true
 					</p>
 				</div>
 			</article>
-		</section>
 <hr>
-		<section>
 			<article>
 				<header>
 					<h3>
 						Kafka and Websockets
-						<span class="view" style="font-size: 12px;font-weight: 100;color: blue;text-decoration: underline;cursor: pointer;">
-							Hide
+						<span class="view clickable">
+							Show
 						</span>
 
 					</h3>
 				</header>
-				<div style="display: block;">
+				<div style="display: none;">
 
 					<i><p>Posted on <time>Sun Jan 14 2018</time> by <a href="#about">forrestbthomas</a></p></i>
 					<p>So, here is my second blog post in as many weeks. Go me! I didn't get as much coding in this week as I would have liked, but that's just kind of the way life goes sometimes. I did a bit of optimization on my deployment for this blog, but that didn't take too much work. It's interesting because with something like this blog, I wonder if I even needed to do it at all. I mean, it's nice that I don't have to do anything other than push to <a href="https://github.com/forrestbthomas">GitHub</a> now and my blog is updated, but I spent several hours setting it up. If I were to count the total time it would take me to simply copy and paste this <code>index.html</code> file over to S3 over the course of my life, I'm not sure it would ever amount to several hours. I guess that's neither here nor there, since it's done now. Lol. It did give me the chance to learn a bit about Git <a href="https://git-scm.com/book/gr/v2/Customizing-Git-Git-Hooks">commit hooks</a> , which was nice. There was one instance in my deployment this week where I had a syntax problem in my <code>config.yml</code> file and didn't know it until it went into <a href="https://circleci.com">CircleCI</a>. Well, that's not ideal, obviously. What I ended up doing is running a <a href="https://npmjs.com/package/yaml-lint">YAML linter</a> before each commit. Supposedly, if that pre-commit hook exits with a non-zero code the commit is supposed to abort. I haven't found that to be the case, but at the very least the YAML linter runs every commit and outputs any errors, so I can always make changes and commit again. </p>
@@ -196,22 +201,20 @@ true
 					<p>Well, that's all I have for now. Hopefully, next week I can provide an update on my front end tweaks (if I get around to them) or some other thing that I have learned. Thanks for reading. Take care.</p>
 				</div>
 			</article>
-		</section>
 		<hr>
-		<section>
 
 			<article>
 				<header>
 					<h3>
 						I Give Up
-						<span class="view" style="font-size: 12px;font-weight: 100;color: blue;text-decoration: underline;cursor: pointer;">
-							Hide
+						<span class="view clickable">
+							Show
 						</span>
 
 					</h3>
 
 				</header>
-				<div style="display: block;">
+				<div style="display: none;">
 
 					<i><p>Posted on <time> Sat Jan 06 2018 </time> by <a href="#about">forrestbthomas</a></p></i>
 					<p>Ok, not really. Here I am, at it again. My third attempt at a blog. Why do I put myself through this? Usually what happens is that I start a blog, write a couple of posts about things that I'm learning and then I lose interest and move on to other things. What makes this time different? Probably nothing, but I know that its important to write about what I'm learning, at the very least because blogs are the primary way new companies evaluate candidates (that and their GitHub repos). Yeah, there are the actual coding interviews, but I'm not gonna get too bent out of shape about companies that care <i>A LOT</i> about how you code in a coding interview. I'll just continue doing what everyone else does: read and memorize Cracking The Coding Interview, do a million problems on LeetCode and I'll be fine. Apparently that's the best measure we can come up with to determine the relative potential success of candidates. To be fair, it does seem like a hard problem to solve, but then again it also seems like we have enough data by this time to realize that memorizing how to reverse a Linked List doesn't correlate <i>at all</i> with how successful someone will be as an engineer. But I digress...</p>
@@ -222,10 +225,11 @@ true
 
 			</article>
 
-		</section>
 		<hr>
+		<div class="clickable" onclick="fetch(this);">Show More...</div>
+		</section>
 		<aside>
-			<h3 id="about">About section</h3>
+			<h3 id="about">About</h3>
 			<p>My name is Forrest and I'm a software engineer...I think. I like to learn new things. The keyword there is <strong>new</strong>. But also I like to learn <i>interesting</i> things. What's interesting is entirely subjective and I truly apologize if what I find uninteresting is something that you can't get enough of (really...no sarcasm there...I honestly hate offending people). This is my third attempt at a blog...I'm really bad at it, but I keep coming back to it because it's something I can <i>probably</i> be good at if I try hard enough. If you want to know about me or about what I find interesting or if you're from the HR department of a company I just applied to (you should hire me, I'm awesome) then you can find out all about that stuff in my posts above. Thanks.</p>
 			<p>Oh, and if you want to get a hold of me for some reason, you can reach me at <a href="mailto:forrestbthomas@gmail.com" target="_top">forrestbthomas@gmail.com</a></p>
 		</aside>
@@ -258,6 +262,37 @@ true
 			e.target.innerHTML = styleToggle[ihtml];
 		}
 		</script>
+		<script>
+// Script to append html
+// This var smells; should be deterministic from list of .html files
+var fetchesRemaining = 2;
+function reqListener (n) {
+	var t = document.createElement('template');
+	var p = n.parentNode;
+	n.parentNode.removeChild(n);
+	t.innerHTML = this.responseText;
+	p.appendChild(t.content.firstChild);
+	p.appendChild(n)
+}
+function handleError(n) {
+	var p = n.parentNode;
+	p.removeChild(n);
+}
+function handleSend() {
+	fetchesRemaining--;
+	this.send();
+}
+function fetch(n) {
+	try {
+		var oReq = new XMLHttpRequest();
+		oReq.addEventListener("load", reqListener.bind(oReq, n));
+		oReq.open("GET", "" + fetchesRemaining  +".html");
+		fetchesRemaining < 0 ? handleError.call(oReq, n) : handleSend.call(oReq);
+	} catch (e) {
+		console.log("error: ", e.message);
+	}
+}
+</script>
 	</body>
 
 </html>
