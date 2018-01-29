@@ -7,6 +7,7 @@ jobs:
     steps:
       - { run: 'echo `which aws`' }
       - { run: 'pwd && ls ./' }
+      - { run: 'git pull origin $CIRCLE_BRANCH' }
       - { run: 'ls ./server' }
   deploy-job:
     docker:
