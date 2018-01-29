@@ -7,8 +7,8 @@ jobs:
     working_directory: /blog
     steps:
       - run: echo `which aws`
-      - run: git pull origin master
       - run: pwd && ls ./
+      - run: ls ./server
             
   deploy-job:
     docker:
@@ -17,7 +17,10 @@ jobs:
     steps:
       - run:
           name: Pull latest
-          command: git pull origin master
+          command: git pull origin master 
+      - run:
+	  name: Build index.html
+	  command: node ./server/inject-html.js
       - run:
           name: Deploy if tests pass and branch is Master
           command: aws s3 cp /blog/index.html s3://forrestbthomas.com/ --acl public-read
