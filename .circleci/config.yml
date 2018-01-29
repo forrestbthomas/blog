@@ -16,7 +16,9 @@ jobs:
     steps:
       - { run: { name: 'Pull latest', command: 'git pull origin master' } }
       - { run: { name: 'Build index.html', command: 'node ./server/inject-html.js' } }
-      - { run: { name: 'Deploy if tests pass and branch is Master', command: 'aws s3 cp /blog/index.html s3://forrestbthomas.com/ --acl public-read' } }
+      - { run: { name: 'Deploy index.html if tests pass and branch is Master', command: 'aws s3 cp /blog/index.html s3://forrestbthomas.com/ --acl public-read' } }
+      - { run: { name: 'Deploy scripts/ if tests pass and branch is Master', command: 'aws s3 cp /blog/scripts s3://forrestbthomas.com/ --recursive --acl public-read' } }
+      - { run: { name: 'Deploy archive/ if tests pass and branch is Master', command: 'aws s3 cp /blog/archive s3://forrestbthomas.com/ --recursive --acl public-read' } }
 workflows:
   version: 2
   build-deploy:
