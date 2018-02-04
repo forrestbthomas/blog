@@ -13,7 +13,7 @@ for (var i = 3; i > 0; i--) {
 	ON_LOAD_COUNTER--;
 }
 var REPLACED_INDEX = INDEX_HTML.replace(POST_SECTION, POSTS.join(''));
-var REPLACED_INDEX_WITH_DATE = REPLACED_INDEX.replace(POST_DATE, POSTS.join(''));
+var REPLACED_INDEX_WITH_DATE = REPLACED_INDEX.replace(POST_DATE, new Date().toDateString());
 fs.writeFileSync('./index.html', REPLACED_INDEX_WITH_DATE);
 
 for (var i = 0; i <= ON_LOAD_COUNTER; i++) {

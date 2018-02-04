@@ -2,13 +2,13 @@
 	<header>
 		<h3>
 			Swapping Variables Was Hard For Me
-			<span class="view clickable">
+			<span class="view clickable" onclick="toggleView(this);">
 				Show
 			</span>
 		</h3>
 	</header>
 
-	<div style="display: block">
+	<div style="display: none">
 		<i><p>Posted on <time><!-- INJECT:DATE --></time> by <a href="#about">forrestbthomas</a></p></i>
 		<p>I was chatting with a friend of mine earlier this week - also a totally awesome software engineer - about his interest in joining a team at Google. He's a great friend and I obviously want him to succeed, so I was asking him what he was doing to prepare for the interview process. We talked about the normal things - recruiter calls, resume, references, GitHub/LinkedIn/Social Media profiles, toy problems and the stereotypical data structures and algorithms problems (don't worry I won't be snarky about it this time). In the course of our conversation I was struck by the memory of how certain things were difficult for me when I first started out (which was <i>not</i> long ago) that no longer are. I could provide a million examples, but the one that sticks out in my mind is the "swapping" of variables when iterating over a list of values. In Javascript, it would be something like this:</p>
 		<pre>
