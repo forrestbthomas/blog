@@ -1,0 +1,68 @@
+<article>
+	<header>
+		<h3>
+			Swapping Variables Was Hard For Me
+			<span class="view clickable">
+				Show
+			</span>
+		</h3>
+	</header>
+
+	<div style="display: block">
+		<i><p>Posted on <time><!-- INJECT:DATE --></time> by <a href="#about">forrestbthomas</a></p></i>
+		<p>I was chatting with a friend of mine earlier this week - also a totally awesome software engineer - about his interest in joining a team at Google. He's a great friend and I obviously want him to succeed, so I was asking him what he was doing to prepare for the interview process. We talked about the normal things - recruiter calls, resume, references, GitHub/LinkedIn/Social Media profiles, toy problems and the stereotypical data structures and algorithms problems (don't worry I won't be snarky about it this time). In the course of our conversation I was struck by the memory of how certain things were difficult for me when I first started out (which was <i>not</i> long ago) that no longer are. I could provide a million examples, but the one that sticks out in my mind is the "swapping" of variables when iterating over a list of values. In Javascript, it would be something like this:</p>
+		<pre>
+<code class="javascript">
+var list = [1, 2, 3, 4];
+for (var i = 0; i < list.length / 2; i++) {
+	var temp = list[i];
+	list[i] = list[list.length - (i+1)];
+	list[list.length - (i+1)] = temp;
+}
+
+console.log(list); // Prints [4, 3, 2, 1] to the console
+</code>
+		</pre>
+		<p>
+		In this few lines of Javascript, we are reversing an array in place. The key to doing this is the ability to "swap" the values at the <code>i</code><sup>th</sup> and <code>list.length - (i + 1)</code> index. When I first started coding, I didn't understand this procedure at all. I mean, I saw it, could read it, could read the words that people used to describe the process of what was happening, but it made zero sense to me. At the time, I didn't really know why...and maybe I still don't. I will say, though, that I have a suspicion as to why it didn't make sense to me. And it's the same reason why the following code took me a while to understand:
+		<pre>
+<code class="javascript">
+var obj_1 = {"a": true};
+var obj_2 = obj_1;
+obj_1 = {"a": false;};
+
+console.log(obj_2); // Prints {"a": true};
+
+var obj_1 = {"a": null};
+var obj_2 = obj_1;
+obj_1.a = 42;
+
+console.log(obj_2); // Prints {"a": 42};
+</code>
+		</pre>
+		</p>
+		<p>
+		That little nugget took me for a ride on numerous occasions. At the end of the day, those two problems confused the hell out of me for the same reason: <i>mutability isn't natural</i>. I know, I know, that's a funny statement coming from a guy whose last post extolled the pain of immutability. Maybe it would be better to say that in some cases, mutability feels super weird and in other cases, it feels natural. Yeah, that feels better...not so absolutist and dogmatic (oh man, don't get me started on dogma...that's a lengthy post I don't think anyone wants to read, lol). Basically, what I'm trying to say is that when you don't have a background in computer science and you come at variables from the math world (where, you know, a variable represents <i>one</i> number and not infinite - at least in the math I got to) it feels confusing to think about how computers store data in memory and why certain data can be manipulated in place and others can't. I suppose that's a good segue to how the above problems work...
+		<div>
+			<p>
+			As far as I understand right now, Javascript stores complex objects (Arrays, Objects, Functions, any non-primitive basically) as a single memory block. When a new object is instantiated, a new place in memory is allocated for that data.  To save storage space (I assume), if a user assigns a new object as a reference to the first object, that second object is simply a pointer to that place in memory. If the user then <i>changes</i> the assignment of the first object to some other place in memory, the second object is then left still pointing to that first place in memory.
+			</p>
+		</div>
+		<div style="width: 100%;">
+			<img src="/images/swap_1.svg" style="display: block; margin: auto;" alt="Storing Objects in Memory">
+		</div>
+		<div>
+			<p> If, however, the user had decided instead to mutate the data stored in memory at the first objects location, both the first and second object would still be pointing to that place in memory and would thus both change.
+			</p>
+		</div>
+		<div>
+			<img src="/images/swap_2.svg" style="display: block; margin: auto;" alt="Storing Objects in Memory">
+		</div>
+		<p>
+		When I first started, the idea that I could "swap" variables in place was totally confusing. Did that mean I was somehow not "fit" for programming or that I lacked some fundamental instinct/intuition that all "good" programmers have? /shrug Maybe...but I don't really care. What got me through was the same thing that always does: <i>work my ass off, practice, memorize, fill in the gaps as they come</i>. None of us can know everything, but all of us have the ability to learn anything. I truly believe that. If I didn't, I wouldn't be doing what I'm doing right.
+		</p>
+
+
+	</div>
+</article>
+<hr>

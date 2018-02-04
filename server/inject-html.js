@@ -1,6 +1,7 @@
 var fs = require('fs');
 var ON_LOAD_COUNTER = fs.readdirSync('./posts/').length - 1;
 var POST_SECTION = new RegExp("<!-- INJECT:HTML -->");
+var POST_DATE = new RegExp("<!-- INJECT:DATE -->");
 var INDEX_HTML = fs.readFileSync('./placeholder.index.html').toString('utf8');
 var ARCHIVE_HTML =  fs.readFileSync('./archive/placeholder.index.html').toString('utf8');
 var POSTS = [];
@@ -12,7 +13,8 @@ for (var i = 3; i > 0; i--) {
 	ON_LOAD_COUNTER--;
 }
 var REPLACED_INDEX = INDEX_HTML.replace(POST_SECTION, POSTS.join(''));
-fs.writeFileSync('./index.html', REPLACED_INDEX)
+var REPLACED_INDEX_WITH_DATE = REPLACED_INDEX.replace(POST_DATE, POSTS.join(''));
+fs.writeFileSync('./index.html', REPLACED_INDEX_WITH_DATE);
 
 for (var i = 0; i <= ON_LOAD_COUNTER; i++) {
 	ARCHIVE.push(fs.readFileSync('./posts/' + ON_LOAD_COUNTER + '.html').toString('utf8'));
